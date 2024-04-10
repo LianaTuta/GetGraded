@@ -1,7 +1,18 @@
+using GetGraded.BL.Services.Implementation;
+using GetGraded.BL.Services.Interface;
+using GetGraded.DAL.Repository.Implementation;
+using GetGraded.DAL.Repository.Interface;
+using GetGraded.Extensions;
+using GetGraded.Migrations;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddServices();
+builder.Services.AddRepositories();
+builder.Services.AddDbContext<GetGradedContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GetGradedDb")));
 
 var app = builder.Build();
 
@@ -22,6 +33,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=FirstPage}/{id?}");
 
 app.Run();
