@@ -11,5 +11,8 @@ namespace GetGraded.Migrations
 
         }
         public DbSet<TestSave> Service { get; set; }
+        public DbSet<UserProfile> UserProfile { get; set; }
+        public DbSet<UserLoginDetails> UserLoginDetails { get; set; }
+        public DbSet<Role> Role { get; set; }
     }
 }
