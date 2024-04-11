@@ -1,0 +1,48 @@
+﻿@model UserProfileView
+@{
+    ViewBag.Title = "Edit Details";
+}
+<head>
+    <style>
+        body {
+            background-color: #68437d
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
+
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login">
+            <div class="wrap-login">
+                <div class="login-form-title">Edit account details</div>
+                @using (Html.BeginForm("EditDetails", "UserAccount", FormMethod.Post))
+                {
+                    <div class="wrap-input">
+                        <div> @Html.TextBoxFor(a => a.Email, new { placeholder = "Email", @class = "input-container", @readonly = "readonly" })</div>
+                    </div>
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.FirstName, new { placeholder = "First Name", @class = "input-container", required = "required" })
+                    </div>
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.MiddleName, new { placeholder = "Middle Name", @class = "input-container" })
+                    </div>
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.LastName, new { placeholder = "Last Name", @class = "input-container", required = "required" })
+                    </div>
+
+                    <div>
+                        <div class="container-login-form-btn">
+
+                            <button class="login-form-btn">
+                                Save Chages
+                            </button>
+
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</body>

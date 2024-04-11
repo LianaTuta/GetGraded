@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace GetGraded.Controllers
 {
-    public class UserAccountController: Controller
+    public class UserAccountController : Controller
     {
         private readonly IUserProfileSrvice _userProfileSrvice;
 
@@ -29,19 +29,22 @@ namespace GetGraded.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        public IActionResult FirstPage()
+        public IActionResult Edit()
         {
             return View();
         }
 
         [HttpPost]
+        public async Task<IActionResult> EditDetails(UserProfileView userLogin)
+        {
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> LoginUser(UserLoginView userLogin)
         {
-           
+
             return RedirectToAction("Index", "Home");
         }
 
