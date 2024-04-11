@@ -24,6 +24,11 @@ namespace GetGraded.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -32,12 +37,20 @@ namespace GetGraded.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LoginUser(UserLoginView userLogin)
+        {
+           
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         public async Task<IActionResult> SignUp(UserProfileView userProfile)
         {
             await _userProfileSrvice.CreateAccount(userProfile);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(Login));
         }
     }
 }
