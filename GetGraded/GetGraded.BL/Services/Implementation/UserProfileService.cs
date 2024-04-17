@@ -41,6 +41,7 @@ namespace GetGraded.BL.Services.Implementation
             userProfile.FirstName = userProfileView.FirstName;
             userProfile.MiddleName = userProfileView.MiddleName;
             userProfile.LastName = userProfileView.LastName;
+            userProfile.BirthDate = userProfileView.BirthDate;
 
             await _userProfileRepository.UpdateUserDetails(userProfile);
 		}

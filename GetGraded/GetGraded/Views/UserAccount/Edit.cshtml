@@ -30,6 +30,10 @@
                     <div class="wrap-input">
                         @Html.TextBoxFor(a => a.LastName, new { placeholder = "Last Name", @class = "input-container", required = "required" })
                     </div>
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.BirthDate, new { type = "date", @class = "input-container", required = "required" })
+                    </div>
+
 
                     <div>
                         <div class="container-login-form-btn">
