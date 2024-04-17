@@ -19,7 +19,7 @@
                 @using (Html.BeginForm("EditDetails", "UserAccount", FormMethod.Post))
                 {
                     <div class="wrap-input">
-                        <div> @Html.TextBoxFor(a => a.Email, new { placeholder = "Email", @class = "input-container", @readonly = "readonly" })</div>
+                        <div> @Html.TextBoxFor(a => a.Email, new { placeholder = "Email", @class = "input-container"})</div>
                     </div>
                     <div class="wrap-input">
                         @Html.TextBoxFor(a => a.FirstName, new { placeholder = "First Name", @class = "input-container", required = "required" })

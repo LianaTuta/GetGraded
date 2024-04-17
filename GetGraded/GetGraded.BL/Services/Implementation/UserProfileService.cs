@@ -31,5 +31,18 @@ namespace GetGraded.BL.Services.Implementation
                 UserLoginId = id
             });
         }
+
+        public async Task UpdateAccountDetails(UserProfileView userProfileView)
+        {
+            var id = await _userProfileRepository.FindUserProfile(userProfileView.Email);
+
+            UserProfile userProfile = await _userProfileRepository.GetUserDetails(id);
+
+            userProfile.FirstName = userProfileView.FirstName;
+            userProfile.MiddleName = userProfileView.MiddleName;
+            userProfile.LastName = userProfileView.LastName;
+
+            await _userProfileRepository.UpdateUserDetails(userProfile);
+		}
     }
 }

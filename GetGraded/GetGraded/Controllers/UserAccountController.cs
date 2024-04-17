@@ -37,7 +37,7 @@ namespace GetGraded.Controllers
         [HttpPost]
         public async Task<IActionResult> EditDetails(UserProfileView userLogin)
         {
-
+            await _userProfileSrvice.UpdateAccountDetails(userLogin);
             return RedirectToAction("Index", "Home");
         }
 

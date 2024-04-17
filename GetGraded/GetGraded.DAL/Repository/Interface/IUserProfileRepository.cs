@@ -8,5 +8,7 @@ namespace GetGraded.DAL.Repository.Interface
 
         Task SaveUserLoginDetails(UserLoginDetails userLoginDetails);
         Task<int> FindUserProfile(string email);
+        Task<UserProfile> GetUserDetails(int userProfileId);
+        Task UpdateUserDetails(UserProfile userProfile);
     }
 }
