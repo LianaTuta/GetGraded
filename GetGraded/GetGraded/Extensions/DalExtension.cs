@@ -11,6 +11,7 @@ namespace GetGraded.Extensions
         {
             services.AddScoped<ITestRepository, TestRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IUniversityDataRepository, UniverisityDataRepository>();
             return services;
         }
     }

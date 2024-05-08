@@ -11,7 +11,8 @@ namespace GetGraded.Extensions
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddTransient<ITestService, TestService>();
-            services.AddTransient<IUserProfileSrvice, UserProfileService>();
+            services.AddTransient<IUserProfileService, UserProfileService>();
+            services.AddTransient<IUniversityDataService, UniversityDataService>();
             return services;
         }
     }
