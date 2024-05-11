@@ -38,5 +38,10 @@ namespace GetGraded.DAL.Repository.Implementation
         {
             return _context.UniversityYear;
         }
+
+        public Task<Department> GetDepartmentById()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
