@@ -28,10 +28,24 @@ namespace GetGraded.DAL.Repository.Implementation
          
         }
 
-        public async Task<int> FindUserProfile(string email)
+        public async Task<int?> FindUserProfile(string email)
         {
             var userProfile = await  _context.UserLoginDetails.FirstOrDefaultAsync(m => m.Email ==email);
-            return userProfile.Id;
+            return userProfile!=null? userProfile.Id : null ;
+        }
+        public async Task<UserProfile> FindUserProfileById(int id)
+        {
+            return await _context.UserProfile.FirstOrDefaultAsync(m => m.UserLoginId == id);
+        }
+        public async Task SaveStudentDetails(StudentDetails studentDetails)
+        {
+            await _context.StudentDetail.AddAsync(studentDetails);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<StudentDetails> GetStudentDetailsByUserId(int userId)
+        {
+            return await _context.StudentDetail.FirstOrDefaultAsync(s => s.UserLoginId == userId);
         }
 
         public async Task<UserProfile> GetUserDetails(int userProfileId)

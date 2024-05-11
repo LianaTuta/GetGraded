@@ -4,6 +4,7 @@ using GetGraded.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GetGraded.Migrations.Migrations
 {
     [DbContext(typeof(GetGradedContext))]
-    partial class GetGradedContextModelSnapshot : ModelSnapshot
+    [Migration("20240509075155_addDateTime")]
+    partial class addDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,6 +175,9 @@ namespace GetGraded.Migrations.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("UniverisityYearId")
+                        .HasColumnType("int");
 
                     b.Property<int>("UniversityYearId")
                         .HasColumnType("int");

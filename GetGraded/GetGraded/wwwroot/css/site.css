@@ -20,3 +20,41 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.centerLogin {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
+
+.img {
+    max-width: 50%;
+    height: auto;
+}
+
+.img-details {
+    max-width: 50%;
+    height: auto;
+}
+
+.column-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 50px;
+    padding: 50px 50px 50px 50px;
+}
+
+.row-container {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    padding: 10px 10px 10px 10px;
+    gap: 100px;
+}
+
+.border-color-list {
+    border: solid #400340 2px;
+    align-items: center;
+}

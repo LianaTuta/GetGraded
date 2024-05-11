@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GetGraded.Migrations.Migrations
 {
     [DbContext(typeof(GetGradedContext))]
-    [Migration("20240411071226_migrationtest")]
-    partial class migrationtest
+    [Migration("20240417200340_Second")]
+    partial class Second
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,48 @@ namespace GetGraded.Migrations.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("GetGraded.Models.Models.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UniversityId");
+
+                    b.ToTable("Department");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Department 1",
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Department 1",
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Department 3",
+                            UniversityId = 2
+                        });
+                });
 
             modelBuilder.Entity("GetGraded.Models.Models.Role", b =>
                 {
@@ -40,6 +82,18 @@ namespace GetGraded.Migrations.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Professor"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Student"
+                        });
                 });
 
             modelBuilder.Entity("GetGraded.Models.Models.TestSave", b =>
@@ -57,6 +111,35 @@ namespace GetGraded.Migrations.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Service");
+                });
+
+            modelBuilder.Entity("GetGraded.Models.Models.University", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("University");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "University 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "University 2"
+                        });
                 });
 
             modelBuilder.Entity("GetGraded.Models.Models.UserLoginDetails", b =>
@@ -91,6 +174,9 @@ namespace GetGraded.Migrations.Migrations
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -102,23 +188,57 @@ namespace GetGraded.Migrations.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserLoginId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("RoleId");
 
                     b.HasIndex("UserLoginId");
 
                     b.ToTable("UserProfile");
                 });
 
+            modelBuilder.Entity("GetGraded.Models.Models.Department", b =>
+                {
+                    b.HasOne("GetGraded.Models.Models.University", "University")
+                        .WithMany()
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("University");
+                });
+
             modelBuilder.Entity("GetGraded.Models.Models.UserProfile", b =>
                 {
+                    b.HasOne("GetGraded.Models.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GetGraded.Models.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GetGraded.Models.Models.UserLoginDetails", "UserLogin")
                         .WithMany()
                         .HasForeignKey("UserLoginId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Role");
 
                     b.Navigation("UserLogin");
                 });

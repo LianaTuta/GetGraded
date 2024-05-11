@@ -1,10 +1,12 @@
-﻿using GetGraded.Models.ViewModels;
+﻿using GetGraded.Models.Models;
+using GetGraded.Models.ViewModels;
 
 namespace GetGraded.BL.Services.Interface
 {
-    public interface IUserProfileSrvice
+    public interface IUserProfileService
     {
         Task CreateAccount(UserProfileView userprofile);
+        Task<bool> CheckEmailAvailability(string email);
         Task UpdateAccountDetails(UserProfileView userprofile);
     }
 }

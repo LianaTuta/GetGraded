@@ -19,10 +19,13 @@
                 @using (Html.BeginForm("EditDetails", "UserAccount", FormMethod.Post))
                 {
                     <div class="wrap-input">
-                        <div> @Html.TextBoxFor(a => a.Email, new { placeholder = "Email", @class = "input-container"})</div>
+                        <div> @Html.TextBoxFor(a => a.Email, new { placeholder = "Email", @class = "input-container", @readonly = "readonly"})</div>
                     </div>
                     <div class="wrap-input">
-                        @Html.TextBoxFor(a => a.FirstName, new { placeholder = "First Name", @class = "input-container", required = "required" })
+                        <div> @Html.TextBoxFor(a => a.RoleId, new { placeholder = "Role", @class = "input-container", @readonly = "readonly" })</div>
+                    </div>
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.FirstName, new { value = ViewBag.UserFirstName, placeholder = "First Name", @class = "input-container", required = "required" })
                     </div>
                     <div class="wrap-input">
                         @Html.TextBoxFor(a => a.MiddleName, new { placeholder = "Middle Name", @class = "input-container" })
@@ -33,7 +36,12 @@
                     <div class="wrap-input">
                         @Html.TextBoxFor(a => a.BirthDate, new { type = "date", @class = "input-container", required = "required" })
                     </div>
-
+                    <div class="wrap-input">
+                        <div> @Html.TextBoxFor(a => a.UniversityId, new { placeholder = "University", @class = "input-container", @readonly = "readonly" })</div>
+                    </div>
+                    <div class="wrap-input">
+                        <div> @Html.TextBoxFor(a => a.DepartmentId, new { placeholder = "Department", @class = "input-container", @readonly = "readonly" })</div>
+                    </div>
 
                     <div>
                         <div class="container-login-form-btn">

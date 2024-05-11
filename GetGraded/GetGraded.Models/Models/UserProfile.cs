@@ -15,5 +15,9 @@ namespace GetGraded.Models.Models
         public string? MiddleName { get; set; }
         public string LastName { get; set; }
         public DateTime? BirthDate { get; set; }
+        public int RoleId { get; set; }
+        public Role Role { get; set; }
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; }
     }
 }
