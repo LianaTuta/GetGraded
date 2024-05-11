@@ -1,7 +1,23 @@
+using GetGraded.Extensions;
+using GetGraded.Migrations;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using GetGraded.BL.UserProfileStrategy.DI;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().
+    AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    // Add any other JSON serialization options as needed
+}); ;
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddServices();
+builder.Services.AddRepositories();
+builder.Services.RegisterUserProfileStrategy();
+builder.Services.AddDbContext<GetGradedContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GetGradedDb")));
 
 var app = builder.Build();
 
@@ -22,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=UserAccount}/{action=SignUp}/{id?}");
 
 app.Run();
