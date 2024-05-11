@@ -2,7 +2,6 @@ using GetGraded.BL.Services.Interface;
 using GetGraded.Models;
 using GetGraded.Models.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace GetGraded.Controllers

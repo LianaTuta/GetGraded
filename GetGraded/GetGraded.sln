@@ -5,13 +5,13 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetGraded", "GetGraded\GetGraded.csproj", "{D9D7F51A-2604-470D-827C-513D9B8C3E41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetGraded.BL", "GetGraded.BL\GetGraded.BL.csproj", "{C3F92F27-2CFB-48C1-9D6A-13F6C0959362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetGraded.BL", "GetGraded.BL\GetGraded.BL.csproj", "{C3F92F27-2CFB-48C1-9D6A-13F6C0959362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetGraded.DAL", "GetGraded.DAL\GetGraded.DAL.csproj", "{199D470F-7B8A-4CAF-ACF3-C9D6474979B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetGraded.DAL", "GetGraded.DAL\GetGraded.DAL.csproj", "{199D470F-7B8A-4CAF-ACF3-C9D6474979B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetGraded.Models", "GetGraded.Models\GetGraded.Models.csproj", "{BCE5E5C1-8917-4E98-BFE9-672CD0871654}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetGraded.Models", "GetGraded.Models\GetGraded.Models.csproj", "{BCE5E5C1-8917-4E98-BFE9-672CD0871654}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetGraded.Migrations", "GetGraded.Migrations\GetGraded.Migrations.csproj", "{32CE3237-F35A-4491-9C2B-D28284D12F6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetGraded.Migrations", "GetGraded.Migrations\GetGraded.Migrations.csproj", "{32CE3237-F35A-4491-9C2B-D28284D12F6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

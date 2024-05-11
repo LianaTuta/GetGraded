@@ -4,6 +4,7 @@ using GetGraded.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GetGraded.Migrations.Migrations
 {
     [DbContext(typeof(GetGradedContext))]
-    partial class GetGradedContextModelSnapshot : ModelSnapshot
+    [Migration("20240508212453_fourth")]
+    partial class fourth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,78 +24,6 @@ namespace GetGraded.Migrations.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("GetGraded.Models.Models.Assignment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DeadLine")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UniversityYearId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("UniversityYearId");
-
-                    b.ToTable("Assignment");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DeadLine = new DateTime(2024, 5, 18, 12, 30, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 1,
-                            Description = "Write a research paper on a topic of your choice",
-                            Name = "Research Paper",
-                            UniversityYearId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DeadLine = new DateTime(2024, 5, 17, 17, 30, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 1,
-                            Description = "Complete the math problem set covering chapters 1-5",
-                            Name = "Math Problem Set",
-                            UniversityYearId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DeadLine = new DateTime(2024, 5, 27, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 2,
-                            Description = "Analyze and write a critical review of a selected literary work. Focus on themes, characters, and writing style",
-                            Name = "Literature Analysis",
-                            UniversityYearId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DeadLine = new DateTime(2024, 5, 30, 1, 30, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 3,
-                            Description = "Conduct an experiment in the lab and write a detailed report documenting the procedure, results, and conclusions",
-                            Name = "Lab Report",
-                            UniversityYearId = 3
-                        });
-                });
 
             modelBuilder.Entity("GetGraded.Models.Models.Department", b =>
                 {
@@ -172,6 +103,9 @@ namespace GetGraded.Migrations.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("UniverisityYearId")
+                        .HasColumnType("int");
 
                     b.Property<int>("UniversityYearId")
                         .HasColumnType("int");
@@ -334,25 +268,6 @@ namespace GetGraded.Migrations.Migrations
                     b.HasIndex("UserLoginId");
 
                     b.ToTable("UserProfile");
-                });
-
-            modelBuilder.Entity("GetGraded.Models.Models.Assignment", b =>
-                {
-                    b.HasOne("GetGraded.Models.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GetGraded.Models.Models.UniversityYear", "UniversityYear")
-                        .WithMany()
-                        .HasForeignKey("UniversityYearId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-
-                    b.Navigation("UniversityYear");
                 });
 
             modelBuilder.Entity("GetGraded.Models.Models.Department", b =>
