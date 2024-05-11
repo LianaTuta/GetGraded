@@ -1,18 +1,7 @@
-﻿using GetGraded.BL.Services.Interface;
-using GetGraded.BL.UserProfileStrategy.Implementation;
-using GetGraded.DAL.Repository.Interface;
-using GetGraded.Models.Models;
+﻿using GetGraded.BL.UserProfileStrategy.Implementation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using static Azure.Core.HttpHeader;
 
 namespace GetGraded.BL.UserProfileStrategy.DI
 {
@@ -20,10 +9,6 @@ namespace GetGraded.BL.UserProfileStrategy.DI
     {
         public static void RegisterUserProfileStrategy(this IServiceCollection services)
         {
-           /* System.Collections.Generic.IEnumerable<Type> types = from type in typeof(IPaymentStrategy).Assembly.GetTypes()
-                                                                 where type.IsClass && !type.Name.Contains('<') && type.Name.EndsWith("Strategy")
-                                                                 select type;*/
-          //  types.ToList().ForEach(t => services.AddTransient(t));
             services.AddTransient<StudentProfileStrategy>();
             services.AddTransient<TeacherProfileStrategy>();
             services.AddTransient(GetUserProfileStrategy);
@@ -33,9 +18,8 @@ namespace GetGraded.BL.UserProfileStrategy.DI
         {
            
             IHttpContextAccessor contextAccessor = serviceProvider.GetService<IHttpContextAccessor>();
-            int? tokenType = contextAccessor.GetRoleId();
-        //    var  paymentClient = GetPaymentClient(dataRepositiry);
-            return tokenType switch
+            int? role = contextAccessor.GetRoleId();
+            return role switch
             {
                 1 => serviceProvider.GetService<TeacherProfileStrategy>(),
                 _ => serviceProvider.GetService<StudentProfileStrategy>(),

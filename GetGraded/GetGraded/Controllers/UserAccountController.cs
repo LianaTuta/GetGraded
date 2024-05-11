@@ -51,7 +51,7 @@ namespace GetGraded.Controllers
         public async Task<IActionResult> SignUpAccount( UserProfileView userProfile)
         {
             await _userProfileSrvice.CreateAccount(userProfile);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Assignment");
         }
     }
 }

@@ -12,6 +12,7 @@ namespace GetGraded.Extensions
         {
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<IUserProfileService, UserProfileService>();
+            services.AddTransient<IAssignmentService, AssignmentService>();
             services.AddTransient<IUniversityDataService, UniversityDataService>();
             return services;
         }

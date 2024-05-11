@@ -9,9 +9,11 @@ namespace GetGraded.DAL.Repository.Interface
 {
     public interface IUniversityDataRepository
     {
-        Task<List<Department>> GetDepartmentByUniversityId(int universityId);
+       
         Task<IEnumerable<University>> GetUniversities();
         Task<IEnumerable<Department>> GetDepartments();
+        Task<List<Department>> GetDepartmentByUniversityId(int universityId);
+        Task<Department> GetDepartmentById();
         Task<IEnumerable<Role>> GetRoles();
         Task<IEnumerable<UniversityYear>> GetUniversityYears();
     }

@@ -11,7 +11,7 @@ namespace GetGraded.Models.Models
         public int Id { get; set; }
         public int UserLoginId { get; set; }
         public UserLoginDetails UserLogin { get; set; }
-        public int UniverisityYearId { get; set; }
+        public int UniversityYearId { get; set; }
         public UniversityYear UniversityYear { get; set; }
     }
 }

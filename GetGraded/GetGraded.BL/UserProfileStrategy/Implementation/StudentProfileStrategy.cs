@@ -15,7 +15,8 @@ namespace GetGraded.BL.UserProfileStrategy.Implementation
         {
             await _userProfileRepository.SaveStudentDetails(new StudentDetails()
             {
-
+                UserLoginId = userId,
+                UniversityYearId = userProfileView.UniversityYearId
             });
         }
     }
