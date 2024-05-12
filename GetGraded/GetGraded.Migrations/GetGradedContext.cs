@@ -1,9 +1,11 @@
 ﻿using GetGraded.Models.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GetGraded.Migrations
 {
-    public class GetGradedContext : DbContext
+    public class GetGradedContext : IdentityDbContext<IdentityUser>
     {
         public GetGradedContext(DbContextOptions<GetGradedContext> options)
             : base(options)
@@ -81,7 +83,8 @@ namespace GetGraded.Migrations
                    UniversityYearId = 3,
                    DeadLine = new DateTime(2024, 05, 30, 1, 30, 0)
                }
-            ); ;
+            );
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
