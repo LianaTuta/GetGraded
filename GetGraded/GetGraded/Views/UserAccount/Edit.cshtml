@@ -1,4 +1,5 @@
-﻿@model UserProfileView
+﻿@model UserProfile
+
 @{
     ViewBag.Title = "Edit Details";
 }
@@ -18,29 +19,23 @@
                 <div class="login-form-title">Edit account details</div>
                 @using (Html.BeginForm("EditDetails", "UserAccount", FormMethod.Post))
                 {
-                    <div class="wrap-input">
-                        <div> @Html.TextBoxFor(a => a.Email, new { placeholder = "Email", @class = "input-container", @readonly = "readonly"})</div>
+                    <div hidden class="wrap-input">
+                        <div hidden> @Html.TextBoxFor(a => a.Id, new { placeholder = "Id", @class = "input-container", @readonly = "readonly" })</div>
                     </div>
                     <div class="wrap-input">
-                        <div> @Html.TextBoxFor(a => a.RoleId, new { placeholder = "Role", @class = "input-container", @readonly = "readonly" })</div>
+                        <div> @Html.TextBoxFor(a => a.RoleId, new { value = ViewBag.User.RoleId, placeholder = "Role", @class = "input-container", @readonly = "readonly" })</div>
                     </div>
                     <div class="wrap-input">
-                        @Html.TextBoxFor(a => a.FirstName, new { value = ViewBag.UserFirstName, placeholder = "First Name", @class = "input-container", required = "required" })
+                        @Html.TextBoxFor(a => a.FirstName, new { value = ViewBag.User.FirstName, placeholder = "First Name", @class = "input-container", required = "required" })
                     </div>
                     <div class="wrap-input">
-                        @Html.TextBoxFor(a => a.MiddleName, new { placeholder = "Middle Name", @class = "input-container" })
+                        @Html.TextBoxFor(a => a.MiddleName, new { value = ViewBag.User.MiddleName, placeholder = "Middle Name", @class = "input-container" })
                     </div>
                     <div class="wrap-input">
-                        @Html.TextBoxFor(a => a.LastName, new { placeholder = "Last Name", @class = "input-container", required = "required" })
+                        @Html.TextBoxFor(a => a.LastName, new { value = ViewBag.User.LastName, placeholder = "Last Name", @class = "input-container", required = "required" })
                     </div>
                     <div class="wrap-input">
-                        @Html.TextBoxFor(a => a.BirthDate, new { type = "date", @class = "input-container", required = "required" })
-                    </div>
-                    <div class="wrap-input">
-                        <div> @Html.TextBoxFor(a => a.UniversityId, new { placeholder = "University", @class = "input-container", @readonly = "readonly" })</div>
-                    </div>
-                    <div class="wrap-input">
-                        <div> @Html.TextBoxFor(a => a.DepartmentId, new { placeholder = "Department", @class = "input-container", @readonly = "readonly" })</div>
+                        <div> @Html.TextBoxFor(a => a.DepartmentId, new { value = ViewBag.User.DepartmentId, placeholder = "Department", @class = "input-container", @readonly = "readonly" })</div>
                     </div>
 
                     <div>

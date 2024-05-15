@@ -21,7 +21,7 @@ namespace GetGraded.BL.Services.Implementation
         {
             var userProfile = await _userProfileRepository.FindUserProfileById(userId);
             var studentDetails = await _userProfileRepository.GetStudentDetailsByUserId(userId);
-            return await  _assignmentRepository.GetAssignmentsByDepartmentIdUniversityYearId(userProfile.DepartmentId, studentDetails.UniversityYearId);
+            return await  _assignmentRepository.GetAssignmentsByDepartmentIdUniversityYearId((int)userProfile.DepartmentId, studentDetails.UniversityYearId);
         }
     }
 }

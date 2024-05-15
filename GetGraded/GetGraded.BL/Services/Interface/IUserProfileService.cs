@@ -7,6 +7,8 @@ namespace GetGraded.BL.Services.Interface
     {
         Task CreateAccount(UserProfileView userprofile);
         Task<bool> CheckEmailAvailability(string email);
-        Task UpdateAccountDetails(UserProfileView userprofile);
-    }
+        Task UpdateAccountDetails(UserProfile userprofile);
+        Task<UserProfile> GetUserProfileById(int id);
+
+	}
 }

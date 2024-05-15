@@ -46,20 +46,21 @@ namespace GetGraded.BL.Services.Implementation
             var userProfile = await  _userProfileRepository.FindUserProfile(email);
             return userProfile == null ? false : true ;
         }
+        public async Task UpdateAccountDetails(UserProfile userProfile)
+        { 
+            UserProfile userProfileModel = await _userProfileRepository.GetUserDetails(userProfile.Id);
 
-        public async Task UpdateAccountDetails(UserProfileView userProfileView)
-        {
-            var id = await _userProfileRepository.FindUserProfile(userProfileView.Email);
+            userProfileModel.FirstName = userProfile.FirstName;
+            userProfileModel.MiddleName = userProfile.MiddleName;
+            userProfileModel.LastName = userProfile.LastName;
 
-            UserProfile userProfile = await _userProfileRepository.GetUserDetails((int)id);
-
-            userProfile.FirstName = userProfileView.FirstName;
-            userProfile.MiddleName = userProfileView.MiddleName;
-            userProfile.LastName = userProfileView.LastName;
-            userProfile.BirthDate = userProfileView.BirthDate;
-
-            await _userProfileRepository.UpdateUserDetails(userProfile);
+            await _userProfileRepository.UpdateUserDetails(userProfileModel);
 		}
+        public async Task<UserProfile> GetUserProfileById (int id)
+        {
+			return await _userProfileRepository.FindUserProfileById(id);
+		}
+
     }
         
 }

@@ -1,6 +1,7 @@
 ﻿using GetGraded.BL.Services.Interface;
 using GetGraded.DAL.Repository.Interface;
 using GetGraded.Models.ViewModels;
+using GetGraded.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HttpPostAttribute = System.Web.Mvc.HttpPostAttribute;
@@ -18,9 +19,10 @@ namespace GetGraded.Controllers
         public IActionResult Edit()
         {
             int userId = 3;
-            var user = _userProfileRepository.FindUserProfileById(userId);
-            ViewBag.UserFirstName = user.Result.FirstName;
-            return View();
+            var user = _userProfileSrvice.GetUserProfileById(userId);
+
+            ViewBag.User = user.Result;
+            return View(user.Result);
         }
 
         public UserAccountController(ILogger<HomeController> logger, IUserProfileService userProfileSrvice, IUniversityDataService universityDataService)
@@ -58,10 +60,15 @@ namespace GetGraded.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditDetails(UserProfileView userLogin)
+        public async Task<IActionResult> EditDetails(UserProfile user)
         {
-            await _userProfileSrvice.UpdateAccountDetails(userLogin);
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                await _userProfileSrvice.UpdateAccountDetails(user);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(user);
         }
 
         [HttpPost]
