@@ -9,6 +9,7 @@ namespace GetGraded.BL.UserProfileStrategy
 {
     public interface IUserProfileStrategy
     {
-        Task SaveAdditionalProperties(int userId, UserProfileView userProfileView);
+        Task SaveAdditionalProperties(string userId, UserProfileView userProfileView);
+        bool CheckIfStudentHasPassed(int minimumScore, int score);
     }
 }
