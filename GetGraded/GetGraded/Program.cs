@@ -21,7 +21,7 @@ builder.Services.RegisterUserProfileStrategy();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<GetGradedContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GetGradedDb")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GetGradedContext>();
 
@@ -32,6 +32,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Lockout.AllowedForNewUsers = true;
 
     options.User.RequireUniqueEmail = true;
+  
+
 
 }); ;
 
@@ -54,7 +56,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=UserAccount}/{action=SignUp}/{id?}");
+    pattern: "{controller=UserAccount}/{action=Login}/{id?}");
 
 app.MapRazorPages();
 

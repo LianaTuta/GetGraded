@@ -22,6 +22,8 @@ namespace GetGraded.Migrations
         public DbSet<UniversityYear> UniversityYear { get; set; }
         public DbSet<Assignment> Assignment { get; set; }
 
+        public DbSet<SubmittedAnswer> Answer { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Role>().HasData(

@@ -39,9 +39,10 @@ namespace GetGraded.DAL.Repository.Implementation
             return _context.UniversityYear;
         }
 
-        public Task<Department> GetDepartmentById()
+        public async  Task<Department> GetDepartmentById(int id)
         {
-            throw new NotImplementedException();
+            var department = await _context.Department.Where(m => m.Id == id).FirstOrDefaultAsync();
+            return department;
         }
     }
 }

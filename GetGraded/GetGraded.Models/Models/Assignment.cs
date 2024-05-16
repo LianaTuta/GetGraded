@@ -10,5 +10,6 @@
         public Department Department { get; set; }
         public int UniversityYearId { get; set; }
         public UniversityYear UniversityYear { get; set; }
+        public int MinunumPassingScore { get; set; }
     }
 }

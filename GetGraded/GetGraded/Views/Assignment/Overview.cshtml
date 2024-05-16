@@ -1,5 +1,4 @@
-﻿
-@model List<Assignment>
+﻿@model List<Assignment>
 @{
     ViewData["Title"] = "Home Page";
     Layout = "_Layout";
@@ -28,18 +27,25 @@
                     <th style="width:150px">Assignment</th>
                     <th style="width:150px">Description</th>
                     <th style="width:150px">Deadline</th>
+                    <th style="width:150px">Department</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var assignment in @Model)
                 {
+
                     <tr>
-                        <td>@assignment.Name</td>
+                        <td>
+                            <a href="@Url.Action("AssignmentDetails", "Assignment", new {assignmentId=assignment.Id})" title="List View" class="links">
+                                @assignment.Name
+                            </a>
+                        </td>
                         <td>@assignment.Description</td>
                         <td>@assignment.DeadLine</td>
-                       
+                        <td>@assignment.Department.Name</td>
                     </tr>
+
 
                 }
             </tbody>

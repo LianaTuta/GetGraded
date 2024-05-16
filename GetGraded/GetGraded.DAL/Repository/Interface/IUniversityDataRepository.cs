@@ -13,7 +13,7 @@ namespace GetGraded.DAL.Repository.Interface
         Task<IEnumerable<University>> GetUniversities();
         Task<IEnumerable<Department>> GetDepartments();
         Task<List<Department>> GetDepartmentByUniversityId(int universityId);
-        Task<Department> GetDepartmentById();
+        Task<Department> GetDepartmentById(int id);
         Task<IEnumerable<Role>> GetRoles();
         Task<IEnumerable<UniversityYear>> GetUniversityYears();
     }

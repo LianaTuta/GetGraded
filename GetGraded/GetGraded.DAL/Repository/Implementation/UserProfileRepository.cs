@@ -33,9 +33,9 @@ namespace GetGraded.DAL.Repository.Implementation
             var userProfile = await  _context.UserLoginDetails.FirstOrDefaultAsync(m => m.Email ==email);
             return userProfile!=null? userProfile.Id : null ;
         }
-        public async Task<UserProfile> FindUserProfileById(int id)
+        public async Task<UserProfile> FindUserProfileById(string id)
         {
-            return await _context.UserProfile.FirstOrDefaultAsync(m => m.UserLoginId == id);
+            return  await _context.UserProfile.FirstOrDefaultAsync(m => m.AspNetUserId == id);
         }
         public async Task SaveStudentDetails(StudentDetails studentDetails)
         {
@@ -43,9 +43,9 @@ namespace GetGraded.DAL.Repository.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public async Task<StudentDetails> GetStudentDetailsByUserId(int userId)
+        public async Task<StudentDetails> GetStudentDetailsByUserId(string userId)
         {
-            return await _context.StudentDetail.FirstOrDefaultAsync(s => s.UserLoginId == userId);
+            return await _context.StudentDetail.FirstOrDefaultAsync(s => s.AspNetUserId == userId);
         }
 
     }
