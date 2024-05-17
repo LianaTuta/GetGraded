@@ -1,4 +1,4 @@
-﻿@model List<Assignment>
+﻿@model List<AssignmentDetailsView>
 @{
     ViewData["Title"] = "Home Page";
     Layout = "_Layout";
@@ -20,15 +20,20 @@
     <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
 </head>
 <body>
+
     <div class="column-container">
         <table class="table" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
                     <th style="width:150px">Assignment</th>
                     <th style="width:150px">Description</th>
-                    <th style="width:150px">Deadline</th>
-                    <th style="width:150px">Department</th>
-                    <th></th>
+               
+                   @if (Model.Any(a => a.Role == 2))
+                    {
+                        <th style="width:150px">Deadline</th>
+                        <th style="width:150px">Department</th>
+                    }
+                   
                 </tr>
             </thead>
             <tbody>
@@ -42,16 +47,17 @@
                             </a>
                         </td>
                         <td>@assignment.Description</td>
+                        @if (Model.Any(a => a.Role == 2))
+                        {
+                     
                         <td>@assignment.DeadLine</td>
                         <td>@assignment.Department.Name</td>
+                        } 
                     </tr>
-
-
                 }
             </tbody>
         </table>
 
     </div>
-
 </body>
 </html>

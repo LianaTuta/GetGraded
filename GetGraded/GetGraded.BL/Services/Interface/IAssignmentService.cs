@@ -1,4 +1,5 @@
 ﻿using GetGraded.Models.Models;
+using GetGraded.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,12 @@ namespace GetGraded.BL.Services.Interface
 {
     public interface IAssignmentService
     {
-        Task<List<Assignment>> GetStudentAssignments(string userId);
-        Task<Assignment> GetAssignmentsById(int id);
+        Task<List<AssignmentDetailsView>> GetAssignments(string userId);
+        Task<AssignmentDetailsView> GetAssignmentsById(int id, string userId);
         Task SaveAnswer(int assignmentId, string userId, string path);
-       
+
+        Task UpdateAnwer(int score, int answerId, string userId);
+
+
     }
 }

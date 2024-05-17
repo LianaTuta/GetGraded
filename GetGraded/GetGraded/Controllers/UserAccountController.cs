@@ -72,7 +72,7 @@ namespace GetGraded.Controllers
         {
             await _userProfileSrvice.CreateAccount(userProfile);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "UserAccount");
         }
 
         public IActionResult Login()
