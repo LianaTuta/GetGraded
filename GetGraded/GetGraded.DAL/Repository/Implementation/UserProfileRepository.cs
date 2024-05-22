@@ -1,6 +1,7 @@
 ﻿using GetGraded.DAL.Repository.Interface;
 using GetGraded.Migrations;
 using GetGraded.Models.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GetGraded.DAL.Repository.Implementation
@@ -28,10 +29,10 @@ namespace GetGraded.DAL.Repository.Implementation
          
         }
 
-        public async Task<int?> FindUserProfile(string email)
+        public async Task<IdentityUser?> FindUserProfileByEmail(string email)
         {
-            var userProfile = await  _context.UserLoginDetails.FirstOrDefaultAsync(m => m.Email ==email);
-            return userProfile!=null? userProfile.Id : null ;
+            return  await  _context.Users.FirstOrDefaultAsync(m => m.Email ==email);
+            
         }
         public async Task<UserProfile> FindUserProfileById(string id)
         {

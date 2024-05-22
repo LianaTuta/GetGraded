@@ -1,4 +1,5 @@
-﻿using GetGraded.DAL.Repository.Interface;
+﻿using GetGraded.BL.Services.Implementation;
+using GetGraded.DAL.Repository.Interface;
 using GetGraded.Models.Models;
 using GetGraded.Models.ViewModels;
 
@@ -38,6 +39,11 @@ namespace GetGraded.BL.UserProfileStrategy.Implementation
             {
                 return false;
             }
+        }
+
+        public static implicit operator StudentProfileStrategy(UserProfileService v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
