@@ -77,9 +77,14 @@ namespace GetGraded.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult DownloadFile(string filePathName)
         {
+            if (string.IsNullOrEmpty(filePathName) || filePathName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+            {
+                return BadRequest("Invalid file name.");
+            }
+
             var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
             var filePath = Path.Combine(uploads, filePathName);
             if (System.IO.File.Exists(filePath))

@@ -100,9 +100,6 @@ namespace GetGraded.BL.Services.Implementation
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
         }
-  
-
-
 
 }
         

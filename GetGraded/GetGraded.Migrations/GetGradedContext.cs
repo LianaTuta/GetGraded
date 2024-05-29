@@ -56,7 +56,7 @@ namespace GetGraded.Migrations
                    Description = "Write a research paper on a topic of your choice",
                    DepartmentId = 1,
                    UniversityYearId = 1,
-                   DeadLine = new DateTime(2024, 05, 18, 12, 30, 0)
+                   DeadLine = new DateTime(2024, 06, 18, 12, 30, 0)
                },
                new Assignment
                {
@@ -65,7 +65,7 @@ namespace GetGraded.Migrations
                    Description = "Complete the math problem set covering chapters 1-5",
                    DepartmentId = 1,
                    UniversityYearId = 1,
-                   DeadLine = new DateTime(2024, 05, 17, 17, 30, 0)
+                   DeadLine = new DateTime(2024, 06, 17, 17, 30, 0)
                },
                new Assignment
                {
@@ -74,7 +74,7 @@ namespace GetGraded.Migrations
                    Description = "Analyze and write a critical review of a selected literary work. Focus on themes, characters, and writing style",
                    DepartmentId = 2,
                    UniversityYearId = 1,
-                   DeadLine = new DateTime(2024, 05, 27, 14, 30, 0)
+                   DeadLine = new DateTime(2024, 06, 27, 14, 30, 0)
                },
                new Assignment
                {
@@ -83,7 +83,7 @@ namespace GetGraded.Migrations
                    Description = "Conduct an experiment in the lab and write a detailed report documenting the procedure, results, and conclusions",
                    DepartmentId = 3,
                    UniversityYearId = 3,
-                   DeadLine = new DateTime(2024, 05, 30, 1, 30, 0)
+                   DeadLine = new DateTime(2024, 06, 30, 1, 30, 0)
                }
             );
             base.OnModelCreating(modelBuilder);

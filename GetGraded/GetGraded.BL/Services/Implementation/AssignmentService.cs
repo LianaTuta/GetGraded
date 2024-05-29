@@ -40,7 +40,7 @@ namespace GetGraded.BL.Services.Implementation
                 {
                     var department = await _universityDataRepository.GetDepartmentById(assignment.DepartmentId);
                     var answer = await _assignmentRepository.GetAnswerByAssignmentId(assignment.Id);
-                    if (answer == null)
+                    if (answer == null || answer.SubmitterId != userId)
                     {
                         assignmentsView.Add(new AssignmentDetailsView()
                         {
