@@ -91,7 +91,8 @@ namespace GetGraded.Controllers
             var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, true, lockoutOnFailure: false);
             if (result.Succeeded)
             {
-                return RedirectToAction("Overview", "Assignment");
+                bool isCompleted = false;
+                return RedirectToAction("Overview", "Assignment", new { isCompleted });
             }
          
             else

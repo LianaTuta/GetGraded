@@ -24,7 +24,7 @@ namespace GetGraded.Controllers
             _userManager = userManager;
             _hostingEnvironment = hostingEnvironment;
         }
-        public async Task<IActionResult> Overview()
+        public async Task<IActionResult> Overview(bool isCompleted)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -33,12 +33,13 @@ namespace GetGraded.Controllers
                 return RedirectToAction("Login", "UserAccount");
             }
 
-            var assignments = await _assignmentService.GetAssignments(userId);
+        
+            var assignments = await _assignmentService.GetAssignments(userId, isCompleted);
             return View(assignments);
         }
 
         [HttpGet]
-        public async Task<IActionResult> AssignmentDetails(int assignmentId, int? answerId)
+        public async Task<IActionResult> AssignmentDetails(int assignmentId, int? answerId, bool isCompleted)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -47,7 +48,7 @@ namespace GetGraded.Controllers
 				return RedirectToAction("Login", "UserAccount");
 			}
 
-            var model = await _assignmentService.GetAssignmentsById(assignmentId, answerId, userId);
+            var model = await _assignmentService.GetAssignmentsById(assignmentId, answerId, userId, isCompleted);
             return View(model);
         }
 
