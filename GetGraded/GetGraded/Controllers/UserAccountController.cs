@@ -97,7 +97,7 @@ namespace GetGraded.Controllers
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                 return RedirectToAction("Login", "UserAccount");
+                 return View("Login", userLogin);
             }
           
         }

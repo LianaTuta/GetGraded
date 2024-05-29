@@ -9,7 +9,6 @@ using System.Security.Claims;
 
 namespace GetGraded.Controllers
 {
-    [Authorize]
     public class AssignmentController : Controller
     {
         private readonly IAssignmentService _assignmentService;
@@ -28,6 +27,12 @@ namespace GetGraded.Controllers
         public async Task<IActionResult> Overview()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "UserAccount");
+            }
+
             var assignments = await _assignmentService.GetAssignments(userId);
             return View(assignments);
         }
@@ -36,6 +41,12 @@ namespace GetGraded.Controllers
         public async Task<IActionResult> AssignmentDetails(int assignmentId, int? answerId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+			if (userId == null)
+			{
+				return RedirectToAction("Login", "UserAccount");
+			}
+
             var model = await _assignmentService.GetAssignmentsById(assignmentId, answerId, userId);
             return View(model);
         }
@@ -59,6 +70,12 @@ namespace GetGraded.Controllers
                         file.CopyTo(fileStream);
                     }
                     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+					if (userId == null)
+					{
+						return RedirectToAction("Login", "UserAccount");
+					}
+
                     await _assignmentService.SaveAnswer(id, userId, file.FileName);
                     return RedirectToAction("Overview", "Assignment");
                 }
@@ -99,8 +116,14 @@ namespace GetGraded.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitScore(int score, int answerId)
         {
-              var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            await _assignmentService.UpdateAnwer(score, answerId, userId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+			if (userId == null)
+			{
+				return RedirectToAction("Login", "UserAccount");
+			}
+
+			await _assignmentService.UpdateAnwer(score, answerId, userId);
              return RedirectToAction("Overview", "Assignment");
         }
     }

@@ -7,7 +7,15 @@
     <style>
         body {
             background-color: #68437d
-}
+        }
+        #validationSummary {
+            color: red;
+            font: 15;
+        }
+
+        #validationSummary ul {
+            list-style: none;
+        }
     </style>
     <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
 
@@ -24,7 +32,7 @@
                     </div>
 
                     <div class="wrap-input">
-                        @Html.PasswordFor(a => a.Password, new { placeholder = "Password", @class = "input-container", rquired = "required" })
+                        @Html.PasswordFor(a => a.Password, new { placeholder = "Password", @class = "input-container", required = "required" })
                     </div>
                     <div>
                         <div class="container-login-form-btn">
@@ -35,7 +43,7 @@
                           
                         </div>
                     </div>
-
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger", @id = "validationSummary" })
                 }
                 <div class="login-form-title"> @Html.ActionLink("Don't have an account?Create one", "SignUp", "UserAccount")</div>
         </div>
