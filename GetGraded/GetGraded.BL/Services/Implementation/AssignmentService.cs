@@ -58,7 +58,7 @@ namespace GetGraded.BL.Services.Implementation
                                 PathFile = null,
                                 Role = 2,
                                 Score = answer.Score.HasValue? answer.Score.Value : 0,
-                                isCompleted = true,
+                                IsCompleted = true,
                             });
                         }
                     }
@@ -78,7 +78,7 @@ namespace GetGraded.BL.Services.Implementation
                                 PathFile = null,
                                 Role = 2,
                                 Score = 0,
-                                isCompleted = false,
+                                IsCompleted = false,
                             });
                         }
                     }
@@ -118,7 +118,7 @@ namespace GetGraded.BL.Services.Implementation
                                         PathFile = answer.Path,
                                         Role = 1,
                                         Score = answer.Score.Value,
-                                        isCompleted = true,
+                                        IsCompleted = true,
                                     });
                                 }
                             }
@@ -141,7 +141,7 @@ namespace GetGraded.BL.Services.Implementation
                                         PathFile = answer.Path,
                                         Role = 1,
                                         Score = 0,
-                                        isCompleted = false,
+                                        IsCompleted = false,
                                     });
                                 }
                             }
@@ -175,10 +175,10 @@ namespace GetGraded.BL.Services.Implementation
                             DepartmentId = assignment.DepartmentId,
                             Department = department,
                             MinunumPassingScore = assignment.MinunumPassingScore,
-                            PathFile = null,
+                            PathFile = answer.Path,
                             Role = 2,
                             Score = answer.Score.HasValue ? answer.Score.Value : 0,
-                            isCompleted = true,
+                            IsCompleted = true,
                         };
                     }
                 }
@@ -200,7 +200,7 @@ namespace GetGraded.BL.Services.Implementation
                             PathFile = null,
                             Role = 2,
                             Score = 0,
-                            isCompleted = false,
+                            IsCompleted = false,
                         };
                     }
                 }
@@ -234,7 +234,7 @@ namespace GetGraded.BL.Services.Implementation
                                     PathFile = answer.Path,
                                     Role = 1,
                                     Score = answer.Score.Value,
-                                    isCompleted = false,
+                                    IsCompleted = true,
                                 };
                             }
 
@@ -261,7 +261,7 @@ namespace GetGraded.BL.Services.Implementation
                                     PathFile = answer.Path,
                                     Role = 1,
                                     Score = 0,
-                                    isCompleted = false,
+                                    IsCompleted = false,
                                 };
                             }
 
