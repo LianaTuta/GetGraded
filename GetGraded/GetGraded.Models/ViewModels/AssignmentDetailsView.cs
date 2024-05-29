@@ -20,6 +20,6 @@ namespace GetGraded.Models.ViewModels
         public string?  PathFile { get; set; }
         public int Role { get; set; }
         public int Score {get;set;} 
-        public bool isCompleted { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }
