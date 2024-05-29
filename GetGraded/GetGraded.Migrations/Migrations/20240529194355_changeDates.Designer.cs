@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GetGraded.Migrations.Migrations
 {
     [DbContext(typeof(GetGradedContext))]
-    [Migration("20240516234914_ALLCHENGES")]
-    partial class ALLCHENGES
+    [Migration("20240529194355_changeDates")]
+    partial class changeDates
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,7 +65,7 @@ namespace GetGraded.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            DeadLine = new DateTime(2024, 5, 18, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            DeadLine = new DateTime(2024, 6, 18, 12, 30, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 1,
                             Description = "Write a research paper on a topic of your choice",
                             MinunumPassingScore = 0,
@@ -75,7 +75,7 @@ namespace GetGraded.Migrations.Migrations
                         new
                         {
                             Id = 2,
-                            DeadLine = new DateTime(2024, 5, 17, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            DeadLine = new DateTime(2024, 6, 17, 17, 30, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 1,
                             Description = "Complete the math problem set covering chapters 1-5",
                             MinunumPassingScore = 0,
@@ -85,7 +85,7 @@ namespace GetGraded.Migrations.Migrations
                         new
                         {
                             Id = 3,
-                            DeadLine = new DateTime(2024, 5, 27, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            DeadLine = new DateTime(2024, 6, 27, 14, 30, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 2,
                             Description = "Analyze and write a critical review of a selected literary work. Focus on themes, characters, and writing style",
                             MinunumPassingScore = 0,
@@ -95,7 +95,7 @@ namespace GetGraded.Migrations.Migrations
                         new
                         {
                             Id = 4,
-                            DeadLine = new DateTime(2024, 5, 30, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            DeadLine = new DateTime(2024, 6, 30, 1, 30, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 3,
                             Description = "Conduct an experiment in the lab and write a detailed report documenting the procedure, results, and conclusions",
                             MinunumPassingScore = 0,

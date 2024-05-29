@@ -71,6 +71,7 @@
                         <th style="width:150px">Assignment</th>
                         <th style="width:150px">Description</th>
 
+                       
                         @if (Model.Any(a => a.Role == 2))
                         {
                             <th style="width:150px">Deadline</th>
@@ -85,7 +86,7 @@
 
                         <tr>
                             <td>
-                                <a href="@Url.Action("AssignmentDetails", "Assignment", new {assignmentId=assignment.Id})" title="List View" class="links">
+                                <a href="@Url.Action("AssignmentDetails", "Assignment", new {assignmentId=assignment.Id, answerId = assignment.AnswerId,  isCompleted = assignment.isCompleted })" title="List View" class="links">
                                     @assignment.Name
                                 </a>
                             </td>

@@ -19,18 +19,14 @@ namespace GetGraded.Controllers
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly IEmailSender _emailSender;
 
-        private readonly ILogger<HomeController> _logger;
-
-        public UserAccountController(ILogger<HomeController> logger, 
+        public UserAccountController( 
             IUserProfileService userProfileSrvice,
             IUniversityDataService universityDataService,
-
               UserManager<IdentityUser> userManager,
   IUserStore<IdentityUser> userStore,
   SignInManager<IdentityUser> signInManager,
   IEmailSender emailSender)
         {
-            _logger = logger;
             _userProfileSrvice = userProfileSrvice;
             _universityDataService = universityDataService;
             _userManager = userManager;
@@ -95,14 +91,14 @@ namespace GetGraded.Controllers
             var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, true, lockoutOnFailure: false);
             if (result.Succeeded)
             {
-                _logger.LogInformation("User logged in.");
-                return RedirectToAction("Overview", "Assignment");
+                bool isCompleted = false;
+                return RedirectToAction("Overview", "Assignment", new { isCompleted });
             }
          
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                 return RedirectToAction("Login", "UserAccount");
+                 return View("Login", userLogin);
             }
           
         }

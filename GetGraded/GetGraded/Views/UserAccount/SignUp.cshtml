@@ -53,7 +53,7 @@
                         @Html.DropDownListFor(model => model.DepartmentId, Model.Departments, "Select a department", new { id = "DepartmentId", @class = "input-container", required = "required" })
                     </div>
                     <div class="wrap-input">
-                        @Html.DropDownListFor(model => model.RoleId, Model.Roles, "Select an role", new { id = "RoleId", @class = "input-container", required = "required" })
+                        @Html.DropDownListFor(model => model.RoleId, Model.Roles, "Select a role", new { id = "RoleId", @class = "input-container", required = "required" })
                     </div>
                     <div class="wrap-input" id="schoolYearContainer">
                         @Html.DropDownListFor(model => model.UniversityYearId, Model.UniversityYears, "Select a school year", new { id = "UniversityYearId", @class = "input-container", required = "required" })
@@ -61,7 +61,7 @@
                     <div>
                         <div class="container-login-form-btn">
 
-                            <button class="login-form-btn">
+                            <button class="login-form-btn" id="signup-submit">
                                 Sign up
                             </button>
 
@@ -81,9 +81,13 @@
                 console.log(validateEmail(email));
                 if (!validateEmail(email)){
                     $('#emailError').text('Invalid email format').show();
+                    $("#signup-submit").prop('disabled', true);
                 }
                 else{
                     $('#emailError').hide();
+                    if ($("#confirmPasswordError").is(":hidden")) {
+                        $("#signup-submit").prop('disabled', false);
+                    }
                     checkEmailAvailability(email);
                 }
             });
@@ -113,8 +117,10 @@
                 console.log("Selected Role ID: " + roleId);
                 if (roleId === "2") {
                     $("#schoolYearContainer").show();
+                    $("#UniversityYearId").prop("required", true);
                 } else {
                     $("#schoolYearContainer").hide();
+                    $("#UniversityYearId").prop("required", false);
                 }
             });
             checkRoleId();
@@ -122,9 +128,13 @@
                 var password = $("#password").val();
                 var confirmPassword = $(this).val();
                 if (password === confirmPassword) {
-                    $("#confirmPasswordError").hide();
+                    $("#confirmPasswordError").hide(); 
+                    if ($("#emailError").is(":hidden")) {
+                        $("#signup-submit").prop('disabled', false);
+                    }
                 } else {
                     $("#confirmPasswordError").show();
+                    $("#signup-submit").prop('disabled', true);
                 }
             });
         });
@@ -139,7 +149,7 @@
             }
         }
         function validateEmail(email) {
-            var re = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
+            var re = /^[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             return re.test(email);
         }
         function checkEmailAvailability(email) {
@@ -150,8 +160,12 @@
                 success: function (response) {
                     if (response.available) {
                         $('#emailError').hide();
+                        if ($("#confirmPasswordError").is(":hidden")) {
+                            $("#signup-submit").prop('disabled', false);
+                        }
                     } else {
                         $('#emailError').text('Email is already used').show();
+                        $("#signup-submit").prop('disabled', true);
                     }
                 },
                 error: function () {

@@ -2,6 +2,7 @@
 
 using GetGraded.BL.Services.Interface;
 using GetGraded.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -21,24 +22,33 @@ namespace GetGraded.Controllers
             _logger = logger;
             _assignmentService = assignmentService;
             _userManager = userManager;
-
             _hostingEnvironment = hostingEnvironment;
         }
-        public async Task<IActionResult> Overview()
+        public async Task<IActionResult> Overview(bool isCompleted)
         {
-
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var assignments = await _assignmentService.GetAssignments(userId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "UserAccount");
+            }
 
+        
+            var assignments = await _assignmentService.GetAssignments(userId, isCompleted);
             return View(assignments);
         }
 
         [HttpGet]
-        public async Task<IActionResult> AssignmentDetails(int assignmentId)
+        public async Task<IActionResult> AssignmentDetails(int assignmentId, int? answerId, bool isCompleted)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var model = await _assignmentService.GetAssignmentsById(assignmentId, userId);
+
+			if (userId == null)
+			{
+				return RedirectToAction("Login", "UserAccount");
+			}
+
+            var model = await _assignmentService.GetAssignmentsById(assignmentId, answerId, userId, isCompleted);
             return View(model);
         }
 
@@ -55,15 +65,20 @@ namespace GetGraded.Controllers
                     {
                         Directory.CreateDirectory(uploads);
                     }
-
                     var filePath = Path.Combine(uploads, file.FileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         file.CopyTo(fileStream);
                     }
                     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+					if (userId == null)
+					{
+						return RedirectToAction("Login", "UserAccount");
+					}
+
                     await _assignmentService.SaveAnswer(id, userId, file.FileName);
-                    return Ok("File uploaded successfully!");
+                    return RedirectToAction("Overview", "Assignment");
                 }
                 else
                 {
@@ -77,9 +92,14 @@ namespace GetGraded.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult DownloadFile(string filePathName)
         {
+            if (string.IsNullOrEmpty(filePathName) || filePathName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+            {
+                return BadRequest("Invalid file name.");
+            }
+
             var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
             var filePath = Path.Combine(uploads, filePathName);
             if (System.IO.File.Exists(filePath))
@@ -97,8 +117,14 @@ namespace GetGraded.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitScore(int score, int answerId)
         {
-              var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            await _assignmentService.UpdateAnwer(score, answerId, userId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+			if (userId == null)
+			{
+				return RedirectToAction("Login", "UserAccount");
+			}
+
+			await _assignmentService.UpdateAnwer(score, answerId, userId);
              return RedirectToAction("Overview", "Assignment");
         }
     }
