@@ -11,10 +11,10 @@ namespace GetGraded.DAL.Repository.Interface
         Task SaveUserLoginDetails(UserLoginDetails userLoginDetails);
         Task<int?> FindUserProfile(string email);
         Task SaveStudentDetails(StudentDetails studentDetails);
-        Task<UserProfile> FindUserProfileById(int id);
-        Task<StudentDetails> GetStudentDetailsByUserId(int userId);
-        Task<UserProfile> GetUserDetails(int userProfileId);
-        Task UpdateUserDetails(UserProfile userProfile);
-    }
+        Task<UserProfile> FindUserProfileById(string id);
+        Task<StudentDetails> GetStudentDetailsByUserId(string userId);
+		Task<UserProfile> GetUserDetails(int userProfileId);
+		Task UpdateUserDetails(UserProfile userProfile);
+	}
 
 }

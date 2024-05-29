@@ -7,17 +7,37 @@ namespace GetGraded.BL.UserProfileStrategy.Implementation
     public class StudentProfileStrategy : IUserProfileStrategy
     {
         private readonly IUserProfileRepository _userProfileRepository;
-        public StudentProfileStrategy(IUserProfileRepository userProfileRepository)
+        private readonly IAssignmentRepository _assignmentRepository;
+        public StudentProfileStrategy(IUserProfileRepository userProfileRepository, IAssignmentRepository assignmentRepository)
         {
             _userProfileRepository = userProfileRepository;
+            _assignmentRepository = assignmentRepository;
         }
-        public async Task SaveAdditionalProperties(int userId, UserProfileView userProfileView)
+        public async Task SaveAdditionalProperties(string userId, UserProfileView userProfileView)
         {
             await _userProfileRepository.SaveStudentDetails(new StudentDetails()
             {
-                UserLoginId = userId,
+                AspNetUserId = userId,
                 UniversityYearId = userProfileView.UniversityYearId
             });
+        }
+
+        public async Task GetReviewedAssignments(string userId)
+        {
+            // 
+           
+        }
+
+        public bool CheckIfStudentHasPassed(int minimumScore, int score)
+        {
+            if(minimumScore>= score)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

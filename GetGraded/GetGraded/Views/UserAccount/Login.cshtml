@@ -1,4 +1,4 @@
-﻿@page
+﻿
 @model UserLoginView
 @{
     ViewBag.Title = "Login";
@@ -20,11 +20,11 @@
                 @using (Html.BeginForm("LoginUser", "UserAccount", FormMethod.Post))
                 {
                     <div class="wrap-input">
-                        <div> @Html.TextBoxFor(a => a.Email,  new {placeholder = "Username",  @class="input-container" })</div>
+                        <div> @Html.TextBoxFor(a => a.Email, new { placeholder = "Username", @class = "input-container", required = "required" })</div>
                     </div>
 
                     <div class="wrap-input">
-                        @Html.TextBoxFor(a => a.Password,  new {placeholder = "Password",  @class="input-container" })
+                        @Html.PasswordFor(a => a.Password, new { placeholder = "Password", @class = "input-container", rquired = "required" })
                     </div>
                     <div>
                         <div class="container-login-form-btn">
@@ -37,7 +37,7 @@
                     </div>
 
                 }
-                <div class="login-form-title"> @Html.ActionLink("Don't have an account?Create one", "Index", "UserAccount")</div>
+                <div class="login-form-title"> @Html.ActionLink("Don't have an account?Create one", "SignUpPage", "UserAccount")</div>
         </div>
     </div>
 </body>

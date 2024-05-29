@@ -10,5 +10,7 @@ namespace GetGraded.DAL.Repository.Interface
     public interface IAssignmentRepository
     {
         Task<List<Assignment>> GetAssignmentsByDepartmentIdUniversityYearId(int departmentId, int universityYearId);
+        Task<Assignment> GetAssignmentsById(int id);
+        Task SaveAnswer(SubmittedAnswer answer);
     }
 }

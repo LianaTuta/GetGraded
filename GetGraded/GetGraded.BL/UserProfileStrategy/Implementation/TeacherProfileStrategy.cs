@@ -9,9 +9,14 @@ namespace GetGraded.BL.UserProfileStrategy.Implementation
 {
     public class TeacherProfileStrategy : IUserProfileStrategy
     {
-        public async Task SaveAdditionalProperties(int userId, UserProfileView userProfileView)
+        public bool CheckIfStudentHasPassed(int minimumScore, int score)
         {
-            
+            throw new NotImplementedException();
+        }
+
+        public async Task SaveAdditionalProperties(string userId, UserProfileView userProfileView)
+        {
+          
         }
     }
 }

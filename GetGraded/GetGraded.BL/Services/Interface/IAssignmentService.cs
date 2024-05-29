@@ -9,6 +9,9 @@ namespace GetGraded.BL.Services.Interface
 {
     public interface IAssignmentService
     {
-        Task<List<Assignment>> GetStudentAssignments(int userId);
+        Task<List<Assignment>> GetStudentAssignments(string userId);
+        Task<Assignment> GetAssignmentsById(int id);
+        Task SaveAnswer(int assignmentId, string userId, string path);
+       
     }
 }

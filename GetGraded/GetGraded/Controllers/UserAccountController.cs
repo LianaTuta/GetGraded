@@ -1,9 +1,13 @@
 ﻿using GetGraded.BL.Services.Interface;
 using GetGraded.DAL.Repository.Interface;
-using GetGraded.Models.ViewModels;
 using GetGraded.Models.Models;
+using GetGraded.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Diagnostics;
+using System.Security.Claims;
 using HttpPostAttribute = System.Web.Mvc.HttpPostAttribute;
 
 namespace GetGraded.Controllers
@@ -12,28 +16,44 @@ namespace GetGraded.Controllers
     {
         private readonly IUserProfileService _userProfileSrvice;
         private readonly IUniversityDataService _universityDataService;
-        private readonly IUserProfileRepository _userProfileRepository;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUserStore<IdentityUser> _userStore;
+        private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly IEmailSender _emailSender;
 
         private readonly ILogger<HomeController> _logger;
 
-        public IActionResult Edit()
+		public UserAccountController(ILogger<HomeController> logger,
+		   IUserProfileService userProfileSrvice,
+		   IUniversityDataService universityDataService,
+
+			 UserManager<IdentityUser> userManager,
+ IUserStore<IdentityUser> userStore,
+ SignInManager<IdentityUser> signInManager,
+ IEmailSender emailSender)
+		{
+			_logger = logger;
+			_userProfileSrvice = userProfileSrvice;
+			_universityDataService = universityDataService;
+			_userManager = userManager;
+			_userStore = userStore;
+			_emailStore = GetEmailStore();
+			_signInManager = signInManager;
+			_emailSender = emailSender;
+		}
+
+		public IActionResult Edit()
         {
-            int userId = 3;
+            var userId = _userManager.GetUserId(HttpContext.User);
+
             var user = _userProfileSrvice.GetUserProfileById(userId);
 
-            ViewBag.User = user.Result;
+			ViewBag.User = user.Result;
             return View(user.Result);
         }
 
-        public UserAccountController(ILogger<HomeController> logger, IUserProfileService userProfileSrvice, IUniversityDataService universityDataService)
-        {
-            _logger = logger;
-            _userProfileSrvice = userProfileSrvice;
-            _universityDataService = universityDataService;
-        }
-
-
-        public async Task<IActionResult> SignUp(UserProfileView userProfile)
+		public async Task<IActionResult> SignUp(UserProfileView userProfile)
         {
 
             userProfile.Universites = (await _universityDataService.GetUninversities()).ToList().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
@@ -62,13 +82,14 @@ namespace GetGraded.Controllers
         [HttpPost]
         public async Task<IActionResult> EditDetails(UserProfile user)
         {
-            if (ModelState.IsValid)
-            {
+
+			/*if (ModelState.IsValid)
+            {*/
                 await _userProfileSrvice.UpdateAccountDetails(user);
                 return RedirectToAction("Index", "Home");
-            }
+            /*}
 
-            return View(user);
+            return RedirectToAction("Edit");*/
         }
 
         [HttpPost]
@@ -82,7 +103,54 @@ namespace GetGraded.Controllers
         public async Task<IActionResult> SignUpAccount( UserProfileView userProfile)
         {
             await _userProfileSrvice.CreateAccount(userProfile);
-            return RedirectToAction("Index", "Assignment");
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
+        /*[HttpPost]
+        public async Task<IActionResult> LoginUser(UserLoginView userLogin)
+        {
+            var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, true, lockoutOnFailure: false);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("User logged in.");
+                return RedirectToAction("Overview", "Assignment");
+            }
+         
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                 return RedirectToAction("Login", "UserAccount");
+            }
+          
+        }*/
+        private IdentityUser CreateUser()
+        {
+            try
+            {
+                return Activator.CreateInstance<IdentityUser>();
+            }
+            catch
+            {
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+            }
+        }
+
+        private IUserEmailStore<IdentityUser> GetEmailStore()
+        {
+            if (!_userManager.SupportsUserEmail)
+            {
+                throw new NotSupportedException("The default UI requires a user store with email support.");
+            }
+            return (IUserEmailStore<IdentityUser>)_userStore;
         }
     }
 }
