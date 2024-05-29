@@ -19,9 +19,7 @@ namespace GetGraded.Controllers
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly IEmailSender _emailSender;
 
-        private readonly ILogger<HomeController> _logger;
-
-        public UserAccountController(ILogger<HomeController> logger, 
+        public UserAccountController( 
             IUserProfileService userProfileSrvice,
             IUniversityDataService universityDataService,
 
@@ -30,7 +28,6 @@ namespace GetGraded.Controllers
   SignInManager<IdentityUser> signInManager,
   IEmailSender emailSender)
         {
-            _logger = logger;
             _userProfileSrvice = userProfileSrvice;
             _universityDataService = universityDataService;
             _userManager = userManager;
@@ -95,7 +92,6 @@ namespace GetGraded.Controllers
             var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, true, lockoutOnFailure: false);
             if (result.Succeeded)
             {
-                _logger.LogInformation("User logged in.");
                 return RedirectToAction("Overview", "Assignment");
             }
          

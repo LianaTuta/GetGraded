@@ -2,12 +2,14 @@
 
 using GetGraded.BL.Services.Interface;
 using GetGraded.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace GetGraded.Controllers
 {
+    [Authorize]
     public class AssignmentController : Controller
     {
         private readonly IAssignmentService _assignmentService;
