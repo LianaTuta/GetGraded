@@ -70,8 +70,16 @@ namespace GetGraded.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUpAccount( UserProfileView userProfile)
         {
-            await _userProfileSrvice.CreateAccount(userProfile);
+            
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            try
+            {
+                await _userProfileSrvice.CreateAccount(userProfile);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Failed to process the data: " + ex.Message);
+            }
             return RedirectToAction("Login", "UserAccount");
         }
 

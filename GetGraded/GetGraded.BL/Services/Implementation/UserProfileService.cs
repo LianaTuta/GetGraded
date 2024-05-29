@@ -35,6 +35,7 @@ namespace GetGraded.BL.Services.Implementation
             _signInManager = signInManager;
             
             _userProfileStrategy = userProfileStrategy;
+            _emailStore = GetEmailStore();
 
         }
 
@@ -43,7 +44,7 @@ namespace GetGraded.BL.Services.Implementation
         {
             var user = CreateUser();
             await _userStore.SetUserNameAsync(user, userprofile.Email, CancellationToken.None);
-            //await _emailStore.SetEmailAsync(user, userprofile.Email, CancellationToken.None);
+            await _emailStore.SetEmailAsync(user, userprofile.Email, CancellationToken.None);
             var result = await _userManager.CreateAsync(user, userprofile.Password);
 
             if (result.Succeeded)
@@ -63,6 +64,11 @@ namespace GetGraded.BL.Services.Implementation
                     DepartmentId = userprofile.DepartmentId,
                 });
                 await _userProfileStrategy.SaveAdditionalProperties(userId,  userprofile);
+            }
+            else
+            {
+
+                throw new Exception("Failed to save user account");
             }
         }
         public async Task<bool> CheckEmailAvailability(string email)
@@ -86,8 +92,18 @@ namespace GetGraded.BL.Services.Implementation
             }
         }
 
-      
+        private IUserEmailStore<IdentityUser> GetEmailStore()
+        {
+            if (!_userManager.SupportsUserEmail)
+            {
+                throw new NotSupportedException("The default UI requires a user store with email support.");
+            }
+            return (IUserEmailStore<IdentityUser>)_userStore;
+        }
+  
 
-    }
+
+
+}
         
 }
