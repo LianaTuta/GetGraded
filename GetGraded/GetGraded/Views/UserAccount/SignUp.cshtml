@@ -5,7 +5,12 @@
 <head>
     <style>
         body {
-            background-color: #68437d
+            background-color: #00a8db;
+        }
+
+        #title {
+            margin-bottom: 15px;
+            font-size: 3rem;
         }
     </style>
     <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
@@ -14,7 +19,7 @@
     <div class="limiter">
         <div class="container-login">
             <div class="wrap-login">
-                <div class="login-form-title">Sign up</div>
+                <div class="login-form-title" id="title" >Sign up</div>
                 @using (Html.BeginForm("SignUpAccount", "UserAccount", FormMethod.Post))
                 {
                     <div class="wrap-input">
@@ -40,7 +45,7 @@
                     <div class="wrap-input">
                         @Html.TextBoxFor(a => a.BirthDate, new { placeholder = "Birthdate", @class = "input-container", type = "date" })
                     </div>
-                    <div class="login-form-title">Univerisity Details</div>
+                    <div class="login-form-title" id="title" >Univerisity Details</div>
                     <div class="wrap-input">
                         @Html.DropDownListFor(model => model.UniversityId, Model.Universites, "Select an university", new { id = "UniversityId", @class = "input-container", required = "required" })
                     </div>

@@ -7,57 +7,101 @@
 <html>
 <head>
     <style>
-        table {
-            border-collapse: collapse;
+        body{
+            background-color: #00a8db;
+        }
+        .assignment-page-wrapper {
+            background-color: #00a8db;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .assignment-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
             width: 100%;
         }
 
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }</style>
+            .assignment-container table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            .assignment-container th, .assignment-container td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .assignment-container th {
+                background-color: #f2f2f2;
+            }
+
+            .assignment-container tr:hover {
+                background-color: #f1f1f1;
+            }
+
+            .assignment-container a.links {
+                color: #00a8db;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .assignment-container a.links:hover {
+                    text-decoration: underline;
+                }
+    </style>
     <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
 </head>
 <body>
 
-    <div class="column-container">
-        <table class="table" cellpadding="0" cellspacing="0">
-            <thead>
-                <tr>
-                    <th style="width:150px">Assignment</th>
-                    <th style="width:150px">Description</th>
-               
-                   @if (Model.Any(a => a.Role == 2))
-                    {
-                        <th style="width:150px">Deadline</th>
-                        <th style="width:150px">Department</th>
-                    }
-                   
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var assignment in @Model)
-                {
-
+    <div class="assignment-page-wrapper">
+        <div class="assignment-container">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="@Url.Action("AssignmentDetails", "Assignment", new {assignmentId=assignment.Id})" title="List View" class="links">
-                                @assignment.Name
-                            </a>
-                        </td>
-                        <td>@assignment.Description</td>
+                        <th style="width:150px">Assignment</th>
+                        <th style="width:150px">Description</th>
+
                         @if (Model.Any(a => a.Role == 2))
                         {
-                     
-                        <td>@assignment.DeadLine</td>
-                        <td>@assignment.Department.Name</td>
-                        } 
-                    </tr>
-                }
-            </tbody>
-        </table>
+                            <th style="width:150px">Deadline</th>
+                            <th style="width:150px">Department</th>
+                        }
 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var assignment in @Model)
+                    {
+
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("AssignmentDetails", "Assignment", new {assignmentId=assignment.Id})" title="List View" class="links">
+                                    @assignment.Name
+                                </a>
+                            </td>
+                            <td>@assignment.Description</td>
+                            @if (Model.Any(a => a.Role == 2))
+                            {
+
+                                <td>@assignment.DeadLine</td>
+                                <td>@assignment.Department.Name</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </body>
 </html>

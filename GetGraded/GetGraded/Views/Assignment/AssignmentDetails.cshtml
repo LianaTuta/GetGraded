@@ -7,29 +7,46 @@
 <html>
 <head>
     <style>
+        body {
+            background-color: #00a8db;
+            font-family: Arial, sans-serif;
+        }
+
         .column-container {
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
-            margin: 50px;
-            padding: 50px 50px 50px 50px;
+            margin: 50px auto;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
         }
 
         .assignment-name {
             font-size: 24px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 20px; /* Increased space below the assignment name */
+            color: #333;
         }
 
         .subtitle {
             font-size: 18px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin: 20px 0 10px; /* Increased space above and below the subtitle */
             color: #333;
         }
 
+        .button-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .custom-button, .upload-button {
-            background-color: #68437d;
+            background-color: #0056b3;
             border: none;
             color: white;
             padding: 10px 20px;
@@ -37,17 +54,22 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
             cursor: pointer;
             border-radius: 8px;
+            transition: background-color 0.3s;
         }
 
+            .custom-button:hover, .upload-button:hover {
+                background-color: #003d80;
+            }
+
         .upload-button {
-            background-color: #008CBA;
-            position: absolute;
-            right: 50px;
-            bottom: 50px;
+            background-color: #007bff;
         }
+
+            .upload-button:hover {
+                background-color: #0056b3;
+            }
 
         .file-name {
             margin-top: 10px;
@@ -72,11 +94,39 @@
             border-radius: 5px;
         }
 
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
         .invalid-feedback {
             color: #dc3545;
             font-size: 14px;
             margin-top: 5px;
         }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
     </style>
     <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
 </head>
@@ -94,9 +144,11 @@
                 <input type="file" name="file" style="display: none;" id="file-upload" onchange="updateFileName(this)" required />
 
                 @Html.HiddenFor(model => model.Id)
-                <label for="file-upload" class="custom-button">Choose File</label>
-                <span id="file-name" class="file-name"></span>
-                <button type="submit" class="upload-button" id="upload-button" disabled>Upload</button>
+                <div class="button-container">
+                    <label for="file-upload" class="custom-button">Choose File</label>
+                    <span id="file-name" class="file-name"></span>
+                    <button type="submit" class="upload-button" id="upload-button" disabled>Upload</button>
+                </div>
             }
         }
         else if (Model.Role == 1)
@@ -120,7 +172,7 @@
                     <input type="number" id="score" name="score" class="form-control" required min="1" max="100" />
                     <div class="invalid-feedback">Score must be between 1 and 100.</div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit Score</button>
+                <button type="submit" class="btn-primary">Submit Score</button>
             }
         }
     </div>

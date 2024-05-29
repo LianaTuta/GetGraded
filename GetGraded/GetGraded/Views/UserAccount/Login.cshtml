@@ -4,19 +4,30 @@
     ViewBag.Title = "Login";
 }
 <head>
+    <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
     <style>
         body {
-            background-color: #68437d
-}
+            background-color: #00a8db;
+        }
+
+        #title {
+            margin-bottom: 15px;
+            font-size: 3rem;
+        }
+
+        #newacc {
+            font-size: 1.5rem;
+            text-decoration:none;
+        }
+       
     </style>
-    <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
 
 </head>
 <body>
     <div class="limiter">
         <div class="container-login">
             <div class="wrap-login">
-                 <div class="login-form-title">Welcome</div>
+                 <div class="login-form-title" id="title">Welcome</div>
                 @using (Html.BeginForm("LoginUser", "UserAccount", FormMethod.Post))
                 {
                     <div class="wrap-input">
@@ -37,7 +48,7 @@
                     </div>
 
                 }
-                <div class="login-form-title"> @Html.ActionLink("Don't have an account?Create one", "SignUp", "UserAccount")</div>
+                <div class="login-form-title" id="newacc" > @Html.ActionLink("Don't have an account? Create one", "SignUp", "UserAccount")</div>
         </div>
     </div>
 </body>
