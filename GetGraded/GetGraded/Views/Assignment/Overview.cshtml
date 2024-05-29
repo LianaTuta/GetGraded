@@ -65,6 +65,8 @@
 
     <div class="assignment-page-wrapper">
         <div class="assignment-container">
+          @if(@Model.Any())
+           {
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
@@ -81,6 +83,7 @@
                     </tr>
                 </thead>
                 <tbody>
+               
                     @foreach (var assignment in @Model)
                     {
 
@@ -98,9 +101,16 @@
                                 <td>@assignment.Department.Name</td>
                             }
                         </tr>
+                        }
                     }
+                   
                 </tbody>
             </table>
+            }
+            else
+            {
+                <h2 text-align:center !important>Hooray! No assignments for this week!</h2>
+            }
         </div>
     </div>
 
