@@ -39,8 +39,8 @@ namespace GetGraded.BL.Services.Implementation
                 foreach (var assignment in assignments)
                 {
                     var department = await _universityDataRepository.GetDepartmentById(assignment.DepartmentId);
-                    var answer = await _assignmentRepository.GetAnswerByAssignmentId(assignment.Id);
-                    if (answer == null || answer.SubmitterId != userId)
+                    var answer = await _assignmentRepository.GetAnswerByAssignmentIdAndStudentId(assignment.Id, userId);
+                    if (answer == null)
                     {
                         assignmentsView.Add(new AssignmentDetailsView()
                         {
@@ -69,39 +69,45 @@ namespace GetGraded.BL.Services.Implementation
                 }
                 foreach (var assignment in assignmentsTotal)
                 {
-                    var answer = await _assignmentRepository.GetAnswerByAssignmentId(assignment.Id);
-                    if (answer != null && answer.ReviewerId == null)
+                    var answers = await _assignmentRepository.GetAnswerByAssignmentId(assignment.Id);
+                    if (answers.Any())
                     {
-                        var department = await _universityDataRepository.GetDepartmentById(assignment.DepartmentId);
-
-                        assignmentsView.Add(new AssignmentDetailsView()
+                        foreach (var answer in answers)
                         {
-                            Id = assignment.Id,
-                            Name = assignment.Name,
-                            Description = assignment.Description,
-                            DeadLine = assignment.DeadLine,
-                            DepartmentId = assignment.DepartmentId,
-                            Department = department,
-                            AnswerId = answer.Id,
-                            MinunumPassingScore = assignment.MinunumPassingScore,
-                            PathFile = answer.Path,
-                            Role = 1,
-                            Score = 0,
-                            isCompleted = false,
-                        });
+                            if (answer.ReviewerId == null)
+                            {
+                                var department = await _universityDataRepository.GetDepartmentById(assignment.DepartmentId);
+
+                                assignmentsView.Add(new AssignmentDetailsView()
+                                {
+                                    Id = assignment.Id,
+                                    Name = assignment.Name,
+                                    Description = assignment.Description,
+                                    DeadLine = assignment.DeadLine,
+                                    DepartmentId = assignment.DepartmentId,
+                                    Department = department,
+                                    AnswerId = answer.Id,
+                                    MinunumPassingScore = assignment.MinunumPassingScore,
+                                    PathFile = answer.Path,
+                                    Role = 1,
+                                    Score = 0,
+                                    isCompleted = false,
+                                });
+                            }
+                        }
                     }
                 }
             }
             return assignmentsView;
         }
 
-        public async Task<AssignmentDetailsView> GetAssignmentsById(int id, string userId)
+        public async Task<AssignmentDetailsView> GetAssignmentsById(int id, int? answerId, string userId)
         {
             var userProfile = await _userProfileRepository.FindUserProfileById(userId);
             var assignment = await _assignmentRepository.GetAssignmentsById(id);
             if (userProfile.RoleId == 2)
             {
-                var answer = await _assignmentRepository.GetAnswerByAssignmentId(assignment.Id);
+                var answer = await _assignmentRepository.GetAnswerByAssignmentIdAndStudentId(assignment.Id, userId);
                 if (answer == null)
                 {
                     var department = await _universityDataRepository.GetDepartmentById(assignment.DepartmentId);
@@ -125,30 +131,37 @@ namespace GetGraded.BL.Services.Implementation
             }
             else
             {
-                var answer = await _assignmentRepository.GetAnswerByAssignmentId(assignment.Id);
-                if (answer != null && answer.ReviewerId == null)
+                if (answerId.HasValue)
                 {
-                    var department = await _universityDataRepository.GetDepartmentById(assignment.DepartmentId);
-
-                    return new AssignmentDetailsView()
+                    var answer = await _assignmentRepository.GetAnswerById(answerId.Value);
+                    if (answer != null)
                     {
-                        Id = assignment.Id,
-                        Name = assignment.Name,
-                        Description = assignment.Description,
-                        DeadLine = assignment.DeadLine,
-                        DepartmentId = assignment.DepartmentId,
-                        Department = department,
-                        AnswerId = answer.Id,
-                        MinunumPassingScore = assignment.MinunumPassingScore,
-                        PathFile = answer.Path,
-                        Role = 1,
-                        Score = 0,
-                        isCompleted = false,
-                    };
+                        if (answer.ReviewerId == null)
+                        {
+                            var department = await _universityDataRepository.GetDepartmentById(assignment.DepartmentId);
+
+                            return new AssignmentDetailsView()
+                            {
+                                Id = assignment.Id,
+                                Name = assignment.Name,
+                                Description = assignment.Description,
+                                DeadLine = assignment.DeadLine,
+                                DepartmentId = assignment.DepartmentId,
+                                Department = department,
+                                AnswerId = answer.Id,
+                                MinunumPassingScore = assignment.MinunumPassingScore,
+                                PathFile = answer.Path,
+                                Role = 1,
+                                Score = 0,
+                                isCompleted = false,
+                            };
+                        }
+
+                    }
                 }
+
             }
             return null;
-          
         }
 
         public async Task SaveAnswer(int assignmentId, string userId, string path)
@@ -163,7 +176,7 @@ namespace GetGraded.BL.Services.Implementation
 
         public async Task UpdateAnwer(int score, int answerId, string userId)
         {
-          
+
             var answer = await _assignmentRepository.GetAnswerById(answerId);
             if (answer != null)
             {

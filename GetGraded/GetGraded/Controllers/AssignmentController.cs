@@ -23,24 +23,20 @@ namespace GetGraded.Controllers
             _logger = logger;
             _assignmentService = assignmentService;
             _userManager = userManager;
-
             _hostingEnvironment = hostingEnvironment;
         }
         public async Task<IActionResult> Overview()
         {
-
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             var assignments = await _assignmentService.GetAssignments(userId);
-
             return View(assignments);
         }
 
         [HttpGet]
-        public async Task<IActionResult> AssignmentDetails(int assignmentId)
+        public async Task<IActionResult> AssignmentDetails(int assignmentId, int? answerId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var model = await _assignmentService.GetAssignmentsById(assignmentId, userId);
+            var model = await _assignmentService.GetAssignmentsById(assignmentId, answerId, userId);
             return View(model);
         }
 
@@ -57,7 +53,6 @@ namespace GetGraded.Controllers
                     {
                         Directory.CreateDirectory(uploads);
                     }
-
                     var filePath = Path.Combine(uploads, file.FileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
@@ -65,7 +60,7 @@ namespace GetGraded.Controllers
                     }
                     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     await _assignmentService.SaveAnswer(id, userId, file.FileName);
-                    return Ok("File uploaded successfully!");
+                    return RedirectToAction("Overview", "Assignment");
                 }
                 else
                 {

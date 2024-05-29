@@ -22,7 +22,6 @@ namespace GetGraded.Controllers
         public UserAccountController( 
             IUserProfileService userProfileSrvice,
             IUniversityDataService universityDataService,
-
               UserManager<IdentityUser> userManager,
   IUserStore<IdentityUser> userStore,
   SignInManager<IdentityUser> signInManager,

@@ -41,16 +41,21 @@ namespace GetGraded.DAL.Repository.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public async Task<SubmittedAnswer?> GetAnswerByAssignmentId(int assignmentId)
+        public async Task<List<SubmittedAnswer>> GetAnswerByAssignmentId(int assignmentId)
         {
 
-            return  await _context.Answer.Where(a => a.AssignmentId == assignmentId).FirstOrDefaultAsync();
+            return  await _context.Answer.Where(a => a.AssignmentId == assignmentId).ToListAsync();
         }
 
         public async Task<SubmittedAnswer?> GetAnswerById(int id)
         {
 
             return await _context.Answer.Where(a => a.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<SubmittedAnswer?> GetAnswerByAssignmentIdAndStudentId(int assignmentId, string userId)
+        {
+            return await _context.Answer.Where(a => a.AssignmentId == assignmentId &&  a.SubmitterId==userId ).FirstOrDefaultAsync();
         }
     }
 }

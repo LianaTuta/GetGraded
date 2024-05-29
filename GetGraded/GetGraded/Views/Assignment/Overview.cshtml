@@ -42,7 +42,7 @@
 
                     <tr>
                         <td>
-                            <a href="@Url.Action("AssignmentDetails", "Assignment", new {assignmentId=assignment.Id})" title="List View" class="links">
+                            <a href="@Url.Action("AssignmentDetails", "Assignment", new {assignmentId=assignment.Id, answerId = assignment.AnswerId})" title="List View" class="links">
                                 @assignment.Name
                             </a>
                         </td>

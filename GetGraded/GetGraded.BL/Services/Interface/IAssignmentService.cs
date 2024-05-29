@@ -11,7 +11,7 @@ namespace GetGraded.BL.Services.Interface
     public interface IAssignmentService
     {
         Task<List<AssignmentDetailsView>> GetAssignments(string userId);
-        Task<AssignmentDetailsView> GetAssignmentsById(int id, string userId);
+        Task<AssignmentDetailsView> GetAssignmentsById(int id, int? answerId, string userId);
         Task SaveAnswer(int assignmentId, string userId, string path);
 
         Task UpdateAnwer(int score, int answerId, string userId);
