@@ -64,7 +64,7 @@ namespace GetGraded.Migrations
 				   Name = "Math Problem Set",
 				   Description = "Complete the math problem set covering chapters 1-5",
 				   DepartmentId = 1,
-				   UniversityYearId = 2,
+				   UniversityYearId = 1,
 				   DeadLine = new DateTime(2024, 06, 17, 17, 30, 0)
 			   },
 			   new Assignment

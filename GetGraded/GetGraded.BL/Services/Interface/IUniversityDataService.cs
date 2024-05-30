@@ -10,9 +10,9 @@ namespace GetGraded.BL.Services.Interface
     public interface IUniversityDataService
     {
         Task<List<Department>> GetDepartmentByUniversityId(int universityId);
-        Task<IEnumerable<Department>> GetDepartments();
-        Task<IEnumerable<University>> GetUninversities();
-        Task<IEnumerable<Role>> GetRoles();
-        Task<IEnumerable<UniversityYear>> GetUniversityYears();
+        Task<List<Department>> GetDepartments();
+        Task<List<University>> GetUninversities();
+        Task<List<Role>> GetRoles();
+        Task<List<UniversityYear>> GetUniversityYears();
     }
 }
