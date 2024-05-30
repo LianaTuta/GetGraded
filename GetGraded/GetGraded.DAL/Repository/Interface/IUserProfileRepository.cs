@@ -1,4 +1,5 @@
 ﻿using GetGraded.Models.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GetGraded.DAL.Repository.Interface
@@ -8,7 +9,7 @@ namespace GetGraded.DAL.Repository.Interface
         Task<int> SaveUserProfile(UserProfile userProfile);
 
         Task SaveUserLoginDetails(UserLoginDetails userLoginDetails);
-        Task<int?> FindUserProfile(string email);
+        Task<IdentityUser?> FindUserProfileByEmail(string email);
         Task SaveStudentDetails(StudentDetails studentDetails);
         Task<UserProfile> FindUserProfileById(string id);
         Task<StudentDetails> GetStudentDetailsByUserId(string userId);

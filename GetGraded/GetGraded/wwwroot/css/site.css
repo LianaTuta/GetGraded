@@ -58,3 +58,40 @@ body {
     border: solid #400340 2px;
     align-items: center;
 }
+
+.nav-link {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+    .nav-link:hover {
+        color: #0056b3; /* Blue color on hover */
+    }
+
+.navbar-brand {
+    text-decoration: none !important;
+}
+
+.navbar {
+    background-color: #fff !important; /* White background for navbar */
+}
+
+.navbar-brand, .nav-link {
+    color: #333 !important; /* Dark color for text */
+}
+
+    .navbar-brand:hover, .nav-link:hover {
+        color: #0056b3 !important; /* Blue color on hover */
+    }
+
+.footer {
+    background-color: #0056b3; /* Blue background for footer */
+}
+
+    .footer p a {
+        color: white;
+    }
+
+        .footer p a:hover {
+            color: #ffffff; 
+        }

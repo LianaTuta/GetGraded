@@ -20,19 +20,19 @@ namespace GetGraded.BL.Services.Implementation
         {
             return await _universityDataRepository.GetDepartmentByUniversityId(universityId);
         }
-        public async Task<IEnumerable<Department>> GetDepartments()
+        public async Task<List<Department>> GetDepartments()
         {
             return await _universityDataRepository.GetDepartments();
         }
-        public async Task<IEnumerable<University>> GetUninversities()
+        public async Task<List<University>> GetUninversities()
         {
             return await _universityDataRepository.GetUniversities();
         }
-        public async Task<IEnumerable<Role>> GetRoles()
+        public async Task<List<Role>> GetRoles()
         {
             return await _universityDataRepository.GetRoles();
         }
-        public async Task<IEnumerable<UniversityYear>> GetUniversityYears()
+        public async Task<List<UniversityYear>> GetUniversityYears()
         {
             return await _universityDataRepository.GetUniversityYears();
         }

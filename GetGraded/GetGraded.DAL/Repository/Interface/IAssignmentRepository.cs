@@ -10,7 +10,11 @@ namespace GetGraded.DAL.Repository.Interface
     public interface IAssignmentRepository
     {
         Task<List<Assignment>> GetAssignmentsByDepartmentIdUniversityYearId(int departmentId, int universityYearId);
+        Task<List<Assignment>> GetAssignmentsByDepartmentId(int departmentId);
         Task<Assignment> GetAssignmentsById(int id);
         Task SaveAnswer(SubmittedAnswer answer);
+        Task<List<SubmittedAnswer>> GetAnswerByAssignmentId(int assignmentId);
+        Task<SubmittedAnswer?> GetAnswerByAssignmentIdAndStudentId(int assignmentId, string userId);
+        Task<SubmittedAnswer?> GetAnswerById(int id);
     }
 }

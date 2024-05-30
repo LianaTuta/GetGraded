@@ -19,22 +19,23 @@ namespace GetGraded.BL.Services.Implementation
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
-        private readonly IEmailSender _emailSender;
+       
 
         public UserProfileService(IUserProfileRepository userProfileRepository, 
             IUserProfileStrategy userProfileStrategy,
                UserManager<IdentityUser> userManager,
   IUserStore<IdentityUser> userStore,
-  SignInManager<IdentityUser> signInManager,
-  IEmailSender emailSender)
+  SignInManager<IdentityUser> signInManager
+  )
         {
             _userProfileRepository = userProfileRepository;
             _userManager = userManager;
             _userStore = userStore;
-            _emailStore = GetEmailStore();
+           
             _signInManager = signInManager;
-            _emailSender = emailSender;
+            
             _userProfileStrategy = userProfileStrategy;
+            _emailStore = GetEmailStore();
 
         }
 
@@ -64,11 +65,16 @@ namespace GetGraded.BL.Services.Implementation
                 });
                 await _userProfileStrategy.SaveAdditionalProperties(userId,  userprofile);
             }
+            else
+            {
+
+                throw new Exception("Failed to save user account");
+            }
         }
         public async Task<bool> CheckEmailAvailability(string email)
 
         {
-            var userProfile = await  _userProfileRepository.FindUserProfile(email);
+            var userProfile = await  _userProfileRepository.FindUserProfileByEmail(email);
             return userProfile == null ? false : true ;
         }
 
@@ -95,6 +101,6 @@ namespace GetGraded.BL.Services.Implementation
             return (IUserEmailStore<IdentityUser>)_userStore;
         }
 
-    }
+}
         
 }

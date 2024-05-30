@@ -18,6 +18,11 @@ namespace GetGraded.DAL.Repository.Implementation
             _context = context;
         }
 
+        public async  Task<List<Assignment>> GetAssignmentsByDepartmentId(int departmentId)
+        {
+            return _context.Assignment.Where(a => a.DepartmentId == departmentId).ToList();
+        }
+
         public async Task<List<Assignment>> GetAssignmentsByDepartmentIdUniversityYearId(int departmentId, int universityYearId)
         {
             return _context.Assignment.Where( a => a.DepartmentId == departmentId && 
@@ -32,8 +37,25 @@ namespace GetGraded.DAL.Repository.Implementation
         public async Task SaveAnswer(SubmittedAnswer answer)
         {
            
-            await _context.Answer.AddAsync(answer);
+             _context.Answer.Update(answer);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<SubmittedAnswer>> GetAnswerByAssignmentId(int assignmentId)
+        {
+
+            return  await _context.Answer.Where(a => a.AssignmentId == assignmentId).ToListAsync();
+        }
+
+        public async Task<SubmittedAnswer?> GetAnswerById(int id)
+        {
+
+            return await _context.Answer.Where(a => a.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<SubmittedAnswer?> GetAnswerByAssignmentIdAndStudentId(int assignmentId, string userId)
+        {
+            return await _context.Answer.Where(a => a.AssignmentId == assignmentId &&  a.SubmitterId==userId ).FirstOrDefaultAsync();
         }
     }
 }

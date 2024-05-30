@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GetGraded.Migrations.Migrations
 {
     /// <inheritdoc />
-    public partial class ALLCHENGES : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -415,10 +415,18 @@ namespace GetGraded.Migrations.Migrations
                 columns: new[] { "Id", "DeadLine", "DepartmentId", "Description", "MinunumPassingScore", "Name", "UniversityYearId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 5, 18, 12, 30, 0, 0, DateTimeKind.Unspecified), 1, "Write a research paper on a topic of your choice", 0, "Research Paper", 1 },
-                    { 2, new DateTime(2024, 5, 17, 17, 30, 0, 0, DateTimeKind.Unspecified), 1, "Complete the math problem set covering chapters 1-5", 0, "Math Problem Set", 1 },
-                    { 3, new DateTime(2024, 5, 27, 14, 30, 0, 0, DateTimeKind.Unspecified), 2, "Analyze and write a critical review of a selected literary work. Focus on themes, characters, and writing style", 0, "Literature Analysis", 1 },
-                    { 4, new DateTime(2024, 5, 30, 1, 30, 0, 0, DateTimeKind.Unspecified), 3, "Conduct an experiment in the lab and write a detailed report documenting the procedure, results, and conclusions", 0, "Lab Report", 3 }
+                    { 1, new DateTime(2024, 6, 18, 12, 30, 0, 0, DateTimeKind.Unspecified), 1, "Write a research paper on a topic of your choice", 0, "Research Paper", 1 },
+                    { 2, new DateTime(2024, 6, 17, 17, 30, 0, 0, DateTimeKind.Unspecified), 1, "Complete the math problem set covering chapters 1-5", 0, "Math Problem Set", 2 },
+                    { 3, new DateTime(2024, 6, 27, 14, 30, 0, 0, DateTimeKind.Unspecified), 1, "Analyze and write a critical review of a selected literary work. Focus on themes, characters, and writing style", 0, "Literature Analysis", 3 },
+                    { 4, new DateTime(2024, 6, 30, 1, 30, 0, 0, DateTimeKind.Unspecified), 1, "Conduct an experiment in the lab and write a detailed report documenting the procedure, results, and conclusions", 0, "Lab Report", 4 },
+                    { 5, new DateTime(2024, 6, 25, 16, 0, 0, 0, DateTimeKind.Unspecified), 2, "Write an essay on the impact of the Industrial Revolution", 0, "History Essay", 1 },
+                    { 6, new DateTime(2024, 6, 28, 23, 59, 0, 0, DateTimeKind.Unspecified), 2, "Develop a simple mobile application with user authentication", 0, "Computer Science Project", 2 },
+                    { 7, new DateTime(2024, 6, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 2, "Analyze the economic impact of global trade policies", 0, "Economics Report", 3 },
+                    { 8, new DateTime(2024, 6, 29, 10, 0, 0, 0, DateTimeKind.Unspecified), 2, "Create a painting representing modern art styles", 0, "Art Project", 4 },
+                    { 9, new DateTime(2024, 6, 21, 11, 0, 0, 0, DateTimeKind.Unspecified), 3, "Prepare a presentation on the human immune system", 0, "Biology Presentation", 1 },
+                    { 10, new DateTime(2024, 6, 24, 18, 0, 0, 0, DateTimeKind.Unspecified), 3, "Discuss the ethical implications of artificial intelligence", 0, "Philosophy Paper", 2 },
+                    { 11, new DateTime(2024, 6, 26, 14, 0, 0, 0, DateTimeKind.Unspecified), 3, "Complete the titration experiment and submit the results", 0, "Chemistry Lab", 3 },
+                    { 12, new DateTime(2024, 6, 22, 12, 0, 0, 0, DateTimeKind.Unspecified), 3, "Conduct a survey on social media usage among teenagers", 0, "Sociology Survey", 4 }
                 });
 
             migrationBuilder.CreateIndex(

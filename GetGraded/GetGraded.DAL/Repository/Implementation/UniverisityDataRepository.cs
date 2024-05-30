@@ -19,24 +19,24 @@ namespace GetGraded.DAL.Repository.Implementation
             return department;
         }
 
-        public async Task<IEnumerable<University>> GetUniversities()
+        public async Task<List<University>> GetUniversities()
         {
-            return _context.University;
+            return await  _context.University.ToListAsync();
         }
 
-        public async Task<IEnumerable<Department>> GetDepartments()
+        public async Task<List<Department>> GetDepartments()
         {
-            return _context.Department;
+            return await _context.Department.ToListAsync();
         }
 
-        public async Task<IEnumerable<Role>> GetRoles()
+        public async Task<List<Role>> GetRoles()
         {
-            return _context.Role;
+            return await _context.Role.ToListAsync();
         }
 
-        public async Task<IEnumerable<UniversityYear>> GetUniversityYears()
+        public async Task<List<UniversityYear>> GetUniversityYears()
         {
-            return _context.UniversityYear;
+            return await _context.UniversityYear.ToListAsync();
         }
 
         public async  Task<Department> GetDepartmentById(int id)
