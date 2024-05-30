@@ -13,9 +13,6 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary  box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand text-white" asp-area="">GetGraded</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Assignment" asp-action="Overview" asp-route-isCompleted="false">Current assignments</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Assignment" asp-action="Overview" asp-route-isCompleted="true">Completed assignments</a>
-               
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,10 +20,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
 
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link text-dark" asp-controller="Assignment" asp-action="Overview" asp-route-isCompleted="false">Current assignments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark"asp-controller="Assignment" asp-action="Overview" asp-route-isCompleted="true">Completed assignments</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
